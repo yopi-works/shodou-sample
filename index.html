@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【教室名】| 札幌の書道教室</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --gold: #b8960c;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --gray: #666666;
+      --light-gray: #f9f7f4;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #333;
+      background: var(--white);
+    }
+
+    /* ナビゲーション */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(26, 39, 68, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 24px;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    /* ヒーロー */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(10, 20, 45, 0.72), rgba(10, 20, 45, 0.72)),
+        url('https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+    }
+
+    .hero-sub {
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--white);
+      font-size: clamp(2rem, 6vw, 4rem);
+      letter-spacing: 0.15em;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 2;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    /* セクション共通 */
+    section { padding: 80px 24px; }
+
+    .section-label {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 48px;
+      letter-spacing: 0.1em;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto 48px;
+    }
+
+    /* 教室について */
+    .about {
+      background: var(--light-gray);
+    }
+
+    .about-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-inner p {
+      color: var(--gray);
+      line-height: 2.2;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature {
+      background: var(--white);
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 3px solid var(--gold);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .feature h3 {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature p {
+      color: var(--gray);
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    /* クラス・料金 */
+    .classes { background: var(--white); }
+
+    .class-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .class-card {
+      border: 1px solid #e0d8cc;
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+    }
+
+    .class-card.featured {
+      border-color: var(--gold);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .class-card.featured .class-price,
+    .class-card.featured .class-name,
+    .class-card.featured .class-desc {
+      color: var(--white);
+    }
+
+    .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.75rem;
+      padding: 4px 16px;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .class-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .class-price {
+      color: var(--gold);
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 16px 0;
+    }
+
+    .class-price span {
+      font-size: 0.9rem;
+      font-weight: normal;
+    }
+
+    .class-desc {
+      color: var(--gray);
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    /* 先生紹介 */
+    .teacher { background: var(--cream); }
+
+    .teacher-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .teacher-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 4px solid var(--gold);
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-align: center;
+      gap: 8px;
+    }
+
+    .teacher-info h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .teacher-info .title {
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    .teacher-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+
+    /* よくある質問 */
+    .faq { background: var(--light-gray); }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e0d8cc;
+      padding: 24px 0;
+    }
+
+    .faq-q {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .faq-q::before {
+      content: 'Q';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .faq-a {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.9;
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .faq-a::before {
+      content: 'A';
+      position: absolute;
+      left: 0;
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    /* アクセス */
+    .access { background: var(--white); }
+
+    .access-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .access-info table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .access-info td {
+      padding: 12px 0;
+      border-bottom: 1px solid #e0d8cc;
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+
+    .access-info td:first-child {
+      color: var(--gold);
+      font-weight: 500;
+      width: 80px;
+      white-space: nowrap;
+    }
+
+    .map-placeholder {
+      background: #e8e4dc;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 0.9rem;
+      border: 1px solid #d0c8bc;
+    }
+
+    /* お問い合わせ */
+    .contact {
+      background: var(--navy);
+      text-align: center;
+    }
+
+    .contact .section-title { color: var(--white); }
+    .contact .section-label { color: var(--gold); }
+    .contact .divider { background: var(--gold); }
+
+    .contact p {
+      color: #aaa;
+      margin-bottom: 32px;
+      line-height: 2;
+    }
+
+    .contact-form {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { height: 140px; resize: vertical; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover { opacity: 0.85; }
+
+    /* フッター */
+    footer {
+      background: #0f1a30;
+      color: #666;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 640px) {
+      nav { display: none; }
+      .teacher-inner { flex-direction: column; text-align: center; }
+      .access-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <header>
+    <div class="logo">【教室名】</div>
+    <nav>
+      <a href="#about">教室について</a>
+      <a href="#classes">クラス・料金</a>
+      <a href="#access">アクセス</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <p class="hero-sub">SAPPORO SHODO CLASS</p>
+    <h1>筆と向き合う、<br>静かな時間を。</h1>
+    <p>初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。<br>お気軽にご体験ください。</p>
+    <a href="#contact" class="btn">無料体験を申し込む</a>
+  </section>
+
+  <!-- 教室について -->
+  <section class="about" id="about">
+    <p class="section-label">ABOUT</p>
+    <h2 class="section-title">【教室名】について</h2>
+    <div class="divider"></div>
+    <div class="about-inner">
+      <p>はじめまして。【教室名】へようこそ。<br>
+      当教室では、書道を通じて「集中する喜び」と「表現する楽しさ」をお伝えしています。<br>
+      年齢・経験は問いません。筆を持つことが初めての方も、丁寧にご指導いたします。</p>
+      <p>少人数制のアットホームな雰囲気の中で、マイペースに上達できる環境をご用意しています。</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🖌️</div>
+        <h3>少人数制</h3>
+        <p>1クラス最大6名。<br>一人ひとりに丁寧に<br>向き合います。</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌱</div>
+        <h3>初心者歓迎</h3>
+        <p>道具の持ち方から<br>丁寧に指導します。<br>経験は不要です。</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🕐</div>
+        <h3>振替制度あり</h3>
+        <p>お仕事や用事で<br>欠席しても安心。<br>振替受講できます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- クラス・料金 -->
+  <section class="classes" id="classes">
+    <p class="section-label">CLASS & FEE</p>
+    <h2 class="section-title">クラス・料金</h2>
+    <div class="divider"></div>
+    <div class="class-cards">
+      <div class="class-card">
+        <div class="class-name">こどもクラス</div>
+        <div class="class-price">¥4,000<span>/月</span></div>
+        <div class="class-desc">小学生対象<br>月3回・60分<br>道具レンタル無料</div>
+      </div>
+      <div class="class-card featured">
+        <div class="badge">人気No.1</div>
+        <div class="class-name">大人クラス</div>
+        <div class="class-price">¥6,000<span>/月</span></div>
+        <div class="class-desc">18歳以上対象<br>月3回・90分<br>初回体験無料</div>
+      </div>
+      <div class="class-card">
+        <div class="class-name">プライベート</div>
+        <div class="class-price">¥4,000<span>/回</span></div>
+        <div class="class-desc">マンツーマン指導<br>好きな時間に設定<br>展覧会出品サポート</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 先生紹介 -->
+  <section class="teacher" id="teacher">
+    <p class="section-label">TEACHER</p>
+    <h2 class="section-title">講師紹介</h2>
+    <div class="divider"></div>
+    <div class="teacher-inner">
+      <div class="teacher-photo">
+        <span style="font-size:2.5rem">👘</span>
+        <span>先生の写真<br>をここに</span>
+      </div>
+      <div class="teacher-info">
+        <h3>【先生のお名前】</h3>
+        <p class="title">書道師範 ／ 〇〇会会員</p>
+        <p>〇〇大学にて書道を専攻後、師範免許を取得。<br>
+        20年以上の指導経験を持ち、これまでに延べ〇〇名以上の生徒を指導してきました。<br>
+        「書道は誰でも楽しめるもの」をモットーに、初心者の方も温かく迎えています。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section class="faq" id="faq">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">よくある質問</h2>
+    <div class="divider"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">道具は自分で用意する必要がありますか？</div>
+        <div class="faq-a">最初はレンタルをご利用いただけます。続けることが決まったタイミングでご購入いただければ大丈夫です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">大人になってから始めても大丈夫ですか？</div>
+        <div class="faq-a">もちろんです。生徒の約6割が大人から始めた方です。年齢は関係ありません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">体験レッスンはありますか？</div>
+        <div class="faq-a">はい、初回は無料で体験いただけます。お気軽にお問い合わせください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">駐車場はありますか？</div>
+        <div class="faq-a">近隣にコインパーキングがございます。詳しくはお問い合わせください。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section class="access" id="access">
+    <p class="section-label">ACCESS</p>
+    <h2 class="section-title">アクセス</h2>
+    <div class="divider"></div>
+    <div class="access-inner">
+      <div class="access-info">
+        <table>
+          <tr><td>教室名</td><td>【教室名】</td></tr>
+          <tr><td>住所</td><td>【住所を入力】</td></tr>
+          <tr><td>電話</td><td>【電話番号】</td></tr>
+          <tr><td>営業日</td><td>火・木・土曜日</td></tr>
+          <tr><td>営業時間</td><td>10:00〜20:00</td></tr>
+          <tr><td>最寄り</td><td>【最寄り駅・バス停】</td></tr>
+        </table>
+      </div>
+      <div class="map-placeholder">
+        📍 Googleマップを埋め込みます
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ -->
+  <section class="contact" id="contact">
+    <p class="section-label">CONTACT</p>
+    <h2 class="section-title">お問い合わせ</h2>
+    <div class="divider"></div>
+    <p>無料体験・ご見学のお申し込みは<br>下記フォームよりお気軽にどうぞ。</p>
+    <div class="contact-form">
+      <div class="form-group">
+        <label>お名前</label>
+        <input type="text" placeholder="山田 花子">
+      </div>
+      <div class="form-group">
+        <label>メールアドレス</label>
+        <input type="email" placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label>電話番号（任意）</label>
+        <input type="tel" placeholder="090-0000-0000">
+      </div>
+      <div class="form-group">
+        <label>ご用件</label>
+        <textarea placeholder="体験レッスンを希望します。〇曜日の午前中が都合よいです。"></textarea>
+      </div>
+      <button class="btn-submit">送信する</button>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <p>© 2025 【教室名】 All Rights Reserved.</p>
+    <p style="margin-top:10px; font-size:0.75rem; color:#444;">
+      サイト制作：<a href="https://yopi-works.com" target="_blank" style="color:#C4753A; text-decoration:none;">よぴワークス｜yopi-works.com</a>
+    </p>
+  </footer>
+
+</body>
+</html>
