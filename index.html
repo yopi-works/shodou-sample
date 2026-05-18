@@ -59,18 +59,96 @@
 
     .nav-links a:hover { color: var(--gold); }
 
-    /* ヒーロー */
+    /* ヒーロー共通 */
     .hero {
-      background: var(--navy);
-      color: var(--white);
       text-align: center;
       padding: 5rem 2rem 4rem;
+      position: relative;
     }
+
+    /* ===== パターン切替ボタン（確認用・本番では非表示にする） ===== */
+    .style-switcher {
+      position: fixed;
+      top: 70px;
+      right: 1rem;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .style-btn {
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: 'Noto Sans JP', sans-serif;
+      white-space: nowrap;
+    }
+    .style-btn.active { background: var(--gold); color: #fff; }
+
+    /* ===== パターン①：ネイビー（現在） ===== */
+    .hero.style-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .hero.style-navy .hero-en { color: var(--gold); }
+    .hero.style-navy .hero-sub { color: rgba(255,255,255,0.8); }
+
+    /* ===== パターン②：和紙 ===== */
+    .hero.style-washi {
+      background-color: #f0ebe0;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 3px,
+          rgba(180,160,120,0.04) 3px,
+          rgba(180,160,120,0.04) 4px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 5px,
+          rgba(180,160,120,0.03) 5px,
+          rgba(180,160,120,0.03) 6px
+        );
+      color: var(--navy);
+    }
+    .hero.style-washi::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(240,235,224,0) 40%, rgba(200,180,140,0.15) 100%);
+      pointer-events: none;
+    }
+    .hero.style-washi .hero-en { color: #8a6d3b; }
+    .hero.style-washi .hero-sub { color: #5a4a35; }
+    .hero.style-washi .btn-primary { background: #8a6d3b; }
+
+    /* ===== パターン③：日本庭園 ===== */
+    .hero.style-garden {
+      background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+    }
+    .hero.style-garden::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 25, 45, 0.62);
+      pointer-events: none;
+    }
+    .hero.style-garden > * { position: relative; z-index: 1; }
+    .hero.style-garden .hero-en { color: #d4b96a; }
+    .hero.style-garden .hero-sub { color: rgba(255,255,255,0.85); }
 
     .hero-en {
       font-size: 0.85rem;
       letter-spacing: 0.2em;
-      color: var(--gold);
       margin-bottom: 1.5rem;
     }
 
@@ -83,7 +161,6 @@
 
     .hero-sub {
       font-size: 1rem;
-      color: rgba(255,255,255,0.8);
       line-height: 1.8;
       margin-bottom: 2.5rem;
     }
@@ -522,8 +599,15 @@
   </ul>
 </nav>
 
+<!-- スタイル切替ボタン（確認用） -->
+<div class="style-switcher">
+  <button class="style-btn" onclick="setStyle('navy', this)">① ネイビー</button>
+  <button class="style-btn" onclick="setStyle('washi', this)">② 和紙</button>
+  <button class="style-btn active" onclick="setStyle('garden', this)">③ 日本庭園</button>
+</div>
+
 <!-- ヒーロー -->
-<section class="hero">
+<section class="hero style-garden" id="hero-section">
   <p class="hero-en">SAPPORO SHODO CLASS</p>
   <h1>筆と向き合う、<br>静かな時間を。</h1>
   <p class="hero-sub">初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。 お気軽にご体験ください。</p>
@@ -755,6 +839,13 @@
   setTimeout(function() {
     document.getElementById('contact-popup').style.display = 'flex';
   }, 5000);
+
+  function setStyle(style, btn) {
+    var hero = document.getElementById('hero-section');
+    hero.className = 'hero style-' + style;
+    document.querySelectorAll('.style-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
 
   function closePopup() {
     document.getElementById('contact-popup').style.display = 'none';
