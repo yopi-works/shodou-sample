@@ -212,49 +212,62 @@
     /* ABOUT */
     .about {
       background: var(--white);
+      padding: 0;
     }
 
-    .about-lead {
+    .about-title-wrap {
       text-align: center;
-      line-height: 2;
-      color: var(--text);
-      max-width: 680px;
-      margin: 0 auto 3rem;
-      font-size: 1rem;
+      padding: 4rem 2rem 3rem;
     }
 
-    .about-features {
+    .about-row {
       display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 900px;
-      margin: 0 auto;
+      min-height: 380px;
     }
 
-    .feature-card {
-      background: var(--cream);
-      border-radius: 8px;
-      padding: 2rem 1.5rem;
-      text-align: center;
+    .about-row.reverse { flex-direction: row-reverse; }
+
+    .about-img {
       flex: 1;
-      min-width: 200px;
-      max-width: 260px;
+      background-size: cover;
+      background-position: center;
+      min-height: 320px;
     }
 
-    .feature-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .about-text {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 3rem 3.5rem;
+      background: var(--white);
+    }
 
-    .feature-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 1.1rem;
+    .about-text-inner h3 {
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 1.5rem;
       color: var(--navy);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .about-text-inner p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #555;
+    }
+
+    .about-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
       margin-bottom: 0.6rem;
     }
 
-    .feature-desc {
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: #555;
+    @media (max-width: 700px) {
+      .about-row, .about-row.reverse { flex-direction: column; }
+      .about-img { min-height: 240px; }
+      .about-text { padding: 2rem 1.5rem; }
     }
 
     /* コース・料金 */
@@ -625,30 +638,38 @@
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <p class="section-label">ABOUT</p>
-  <h2 class="section-title">【教室名】について</h2>
-  <p class="about-lead">
-    はじめまして。<br>【教室名】へようこそ。<br>
-    当教室では、書道を通じて<br>「集中する喜び」と「表現する楽しさ」を<br>お伝えしています。<br>
-    年齢・経験は問いません。<br>筆を持つことが初めての方も、<br>丁寧にご指導いたします。<br>
-    少人数制のアットホームな雰囲気の中で、<br>マイペースに上達できる環境をご用意しています。
-  </p>
-  <div class="about-features">
-    <div class="feature-card">
-      <div class="feature-icon">🖌️</div>
-      <div class="feature-title">少人数制</div>
-      <p class="feature-desc">1クラス最大6名。<br>一人ひとりに丁寧に向き合います。</p>
+  <div class="about-title-wrap">
+    <p class="section-label">ABOUT</p>
+    <h2 class="section-title">【教室名】について</h2>
+  </div>
+
+  <!-- 行①：テキスト左・写真右 -->
+  <div class="about-row">
+    <div class="about-text">
+      <div class="about-text-inner">
+        <span class="about-tag">WELCOME</span>
+        <h3>はじめての方も、<br>どうぞお気軽に。</h3>
+        <p>はじめまして。【教室名】へようこそ。<br>
+        当教室では、書道を通じて<br>「集中する喜び」と「表現する楽しさ」を<br>お伝えしています。<br>
+        年齢・経験は問いません。<br>
+        筆を持つことが初めての方も、<br>丁寧にご指導いたします。</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">🌱</div>
-      <div class="feature-title">初心者歓迎</div>
-      <p class="feature-desc">道具の持ち方から丁寧に指導します。<br>経験は不要です。</p>
+    <div class="about-img" style="background-image:url('https://images.unsplash.com/photo-1547058881-aa0e591d3082?auto=format&fit=crop&w=800&q=80');"></div>
+  </div>
+
+  <!-- 行②：写真左・テキスト右 -->
+  <div class="about-row reverse">
+    <div class="about-text">
+      <div class="about-text-inner">
+        <span class="about-tag">SMALL CLASS</span>
+        <h3>少人数だから、<br>一人ひとりに向き合えます。</h3>
+        <p>1クラス最大6名の少人数制。<br>
+        アットホームな雰囲気の中で、<br>マイペースに上達できる環境をご用意しています。<br>
+        お仕事や用事で欠席しても、<br>振替受講ができるので安心です。</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">🕐</div>
-      <div class="feature-title">振替制度あり</div>
-      <p class="feature-desc">お仕事や用事で欠席しても安心。<br>振替受講できます。</p>
-    </div>
+    <div class="about-img" style="background-image:url('https://images.unsplash.com/photo-1585952678521-0f5a5ba17c6e?auto=format&fit=crop&w=800&q=80');"></div>
   </div>
 </section>
 
