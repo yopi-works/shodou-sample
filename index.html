@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>【教室名】｜札幌の書道教室</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&family=Yuji+Syuku&display=swap" rel="stylesheet">
   <style>
     :root {
       --navy: #1a2744;
@@ -18,7 +18,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Noto Sans JP', sans-serif;
+      font-family: 'Noto Serif JP', serif;
       background: var(--cream);
       color: var(--text);
     }
@@ -62,7 +62,7 @@
     /* ヒーロー共通 */
     .hero {
       text-align: center;
-      padding: 5rem 2rem 4rem;
+      padding: 8rem 2rem 7rem;
       position: relative;
     }
 
@@ -114,7 +114,25 @@
     .hero.style-washi .hero-sub { color: #4a3a25; }
     .hero.style-washi .btn-primary { background: #7a5c2a; }
 
-    /* ===== パターン②：日本庭園 ===== */
+    /* ===== パターン②：ししおどし（昼） ===== */
+    .hero.style-shishi {
+      background-image: url('Ph/shishiodoshi.jpg');
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+    }
+    .hero.style-shishi::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 30, 20, 0.50);
+      pointer-events: none;
+    }
+    .hero.style-shishi > * { position: relative; z-index: 1; }
+    .hero.style-shishi .hero-en { color: #d4b96a; }
+    .hero.style-shishi .hero-sub { color: rgba(255,255,255,0.85); }
+
+    /* ===== パターン③：日本庭園（夜） ===== */
     .hero.style-garden {
       background-image: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1400&q=80');
       background-size: cover;
@@ -139,7 +157,7 @@
     }
 
     .hero h1 {
-      font-family: 'Noto Serif JP', serif;
+      font-family: 'Yuji Syuku', serif;
       font-size: clamp(2rem, 5vw, 3rem);
       line-height: 1.6;
       margin-bottom: 1.5rem;
@@ -589,11 +607,12 @@
 <div class="style-switcher">
   <span>🎨 背景パターンを選ぶ：</span>
   <button class="style-btn" onclick="setStyle('washi', this)">① 和紙</button>
-  <button class="style-btn active" onclick="setStyle('garden', this)">② 日本庭園</button>
+  <button class="style-btn active" onclick="setStyle('shishi', this)">② ししおどし（昼）</button>
+  <button class="style-btn" onclick="setStyle('garden', this)">③ 日本庭園（夜）</button>
 </div>
 
 <!-- ヒーロー -->
-<section class="hero style-garden" id="hero-section">
+<section class="hero style-shishi" id="hero-section">
   <p class="hero-en">SAPPORO SHODO CLASS</p>
   <h1>筆と向き合う、<br>静かな時間を。</h1>
   <p class="hero-sub">初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。 お気軽にご体験ください。</p>
