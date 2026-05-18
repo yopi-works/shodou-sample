@@ -68,24 +68,30 @@
 
     /* ===== パターン切替ボタン（確認用・本番では非表示にする） ===== */
     .style-switcher {
-      position: fixed;
-      top: 70px;
-      right: 1rem;
-      z-index: 200;
+      background: #2a2a2a;
+      padding: 0.6rem 1.5rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .style-switcher span {
+      color: #aaa;
+      font-size: 0.8rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      white-space: nowrap;
     }
     .style-btn {
-      background: rgba(0,0,0,0.6);
+      background: #444;
       color: #fff;
       border: none;
-      padding: 0.4rem 0.8rem;
+      padding: 0.4rem 1rem;
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       cursor: pointer;
       font-family: 'Noto Sans JP', sans-serif;
       white-space: nowrap;
+      transition: background 0.2s;
     }
     .style-btn.active { background: var(--gold); color: #fff; }
 
@@ -599,8 +605,9 @@
   </ul>
 </nav>
 
-<!-- スタイル切替ボタン（確認用） -->
+<!-- スタイル切替バー（確認用） -->
 <div class="style-switcher">
+  <span>🎨 背景パターンを選ぶ：</span>
   <button class="style-btn" onclick="setStyle('navy', this)">① ネイビー</button>
   <button class="style-btn" onclick="setStyle('washi', this)">② 和紙</button>
   <button class="style-btn active" onclick="setStyle('garden', this)">③ 日本庭園</button>
