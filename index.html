@@ -97,32 +97,19 @@
 
     /* ===== パターン①：和紙 ===== */
     .hero.style-washi {
-      background-color: #e8dfc8;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23paper)' opacity='0.18'/%3E%3C/svg%3E"),
-        repeating-linear-gradient(
-          88deg,
-          transparent,
-          transparent 6px,
-          rgba(160,130,80,0.07) 6px,
-          rgba(160,130,80,0.07) 7px
-        ),
-        repeating-linear-gradient(
-          2deg,
-          transparent,
-          transparent 10px,
-          rgba(160,130,80,0.04) 10px,
-          rgba(160,130,80,0.04) 11px
-        );
+      background-image: url('Ph/washi.jpg');
+      background-size: cover;
+      background-position: center;
       color: var(--navy);
     }
     .hero.style-washi::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, transparent 30%, rgba(180,150,100,0.2) 100%);
+      background: rgba(245, 235, 210, 0.45);
       pointer-events: none;
     }
+    .hero.style-washi > * { position: relative; z-index: 1; }
     .hero.style-washi .hero-en { color: #7a5c2a; }
     .hero.style-washi .hero-sub { color: #4a3a25; }
     .hero.style-washi .btn-primary { background: #7a5c2a; }
