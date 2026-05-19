@@ -64,12 +64,33 @@
     /* ヒーロー */
     .hero {
       display: flex;
-      min-height: 100vh;
+      height: calc(100vh - 62px);
+      min-height: 500px;
     }
 
-    /* 左：スライドショー */
+    /* 左サイドバー：ロゴ */
+    .hero-sidebar {
+      flex: 0 0 16%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      border-right: 1px solid #eee;
+    }
+
+    .hero-sidebar-logo {
+      writing-mode: vertical-rl;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      letter-spacing: 0.2em;
+      line-height: 1.8;
+    }
+
+    /* 中央：スライドショー */
     .hero-left {
-      flex: 0 0 42%;
+      flex: 0 0 27%;
       position: relative;
       overflow: hidden;
     }
@@ -83,7 +104,7 @@
       position: absolute;
       inset: 0;
       background-size: cover;
-      background-position: center;
+      background-position: center 20%;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
@@ -95,7 +116,7 @@
       flex: 1;
       display: flex;
       align-items: center;
-      padding: 5rem 4rem;
+      padding: 3rem 4rem;
       position: relative;
       overflow: hidden;
       background: #f5f2ed;
@@ -109,7 +130,8 @@
       background-image: url('Ph/washi.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.08;
+      opacity: 0.13;
+      z-index: 0;
     }
 
     /* テキストエリア */
@@ -118,10 +140,11 @@
       z-index: 1;
     }
 
-    @media (max-width: 700px) {
-      .hero { flex-direction: column; }
-      .hero-left { flex: 0 0 50vw; height: 50vw; width: 100%; }
-      .hero-right { padding: 3rem 1.5rem; }
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; height: auto; }
+      .hero-sidebar { flex: none; writing-mode: horizontal-tb; padding: 1rem 2rem; border-right: none; border-bottom: 1px solid #eee; justify-content: flex-start; }
+      .hero-left { flex: none; height: 55vw; width: 100%; }
+      .hero-right { padding: 2.5rem 1.5rem; }
     }
 
     .hero-en {
@@ -597,7 +620,11 @@
 
 <!-- ヒーロー -->
 <section class="hero" id="hero-section">
-  <!-- 左：スライドショー -->
+  <!-- 左サイドバー：ロゴ -->
+  <div class="hero-sidebar">
+    <div class="hero-sidebar-logo">【教室名】</div>
+  </div>
+  <!-- 中央：スライドショー -->
   <div class="hero-left">
     <div class="hero-slides">
       <div class="hero-slide active" style="background-image:url('Ph/kimono-woman.jpg');"></div>
