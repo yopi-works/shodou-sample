@@ -61,100 +61,61 @@
 
     .nav-links a:hover { color: var(--gold); }
 
-    /* ヒーロー共通 */
+    /* ヒーロー */
     .hero {
-      text-align: center;
-      padding: 8rem 2rem 7rem;
       position: relative;
-    }
-
-    /* ===== パターン切替ボタン（確認用・本番では非表示にする） ===== */
-    .style-switcher {
-      background: #2a2a2a;
-      padding: 0.6rem 1.5rem;
+      height: 100vh;
+      min-height: 560px;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
     }
-    .style-switcher span {
-      color: #aaa;
-      font-size: 0.8rem;
-      font-family: 'Noto Sans JP', sans-serif;
-      white-space: nowrap;
-    }
-    .style-btn {
-      background: #444;
-      color: #fff;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-family: 'Noto Sans JP', sans-serif;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-    .style-btn.active { background: var(--gold); color: #fff; }
 
-    /* ===== パターン①：和紙 ===== */
-    .hero.style-washi {
-      background-image: url('washi.jpg');
-      background-size: cover;
-      background-position: center;
-      color: var(--navy);
-    }
-    .hero.style-washi::before {
-      content: '';
+    /* スライドショー */
+    .hero-slides {
       position: absolute;
       inset: 0;
-      background: rgba(245, 235, 210, 0.15);
-      pointer-events: none;
+      z-index: 0;
     }
-    .hero.style-washi > * { position: relative; z-index: 1; }
-    .hero.style-washi .hero-en { color: #7a5c2a; }
-    .hero.style-washi .hero-sub { color: #4a3a25; }
-    .hero.style-washi .btn-primary { background: #7a5c2a; }
 
-    /* ===== パターン②：ししおどし（昼） ===== */
-    .hero.style-shishi {
-      background-image: url('shishiodoshi.jpg');
-      background-size: cover;
-      background-position: center;
-      color: var(--white);
-    }
-    .hero.style-shishi::before {
-      content: '';
+    .hero-slide {
       position: absolute;
       inset: 0;
-      background: rgba(10, 30, 20, 0.05);
-      pointer-events: none;
-    }
-    .hero.style-shishi > * { position: relative; z-index: 1; }
-    .hero.style-shishi .hero-en { color: #d4b96a; }
-    .hero.style-shishi .hero-sub { color: rgba(255,255,255,0.85); }
-
-    /* ===== パターン③：日本庭園（夜） ===== */
-    .hero.style-garden {
-      background-image: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1400&q=80');
       background-size: cover;
       background-position: center;
-      color: var(--white);
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
-    .hero.style-garden::before {
-      content: '';
+
+    .hero-slide.active { opacity: 1; }
+
+    .hero-slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 白グレーオーバーレイ */
+    .hero-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(15, 25, 45, 0.62);
-      pointer-events: none;
+      background: rgba(255, 255, 255, 0.42);
+      z-index: 1;
     }
-    .hero.style-garden > * { position: relative; z-index: 1; }
-    .hero.style-garden .hero-en { color: #d4b96a; }
-    .hero.style-garden .hero-sub { color: rgba(255,255,255,0.85); }
+
+    /* テキストエリア */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
 
     .hero-en {
       font-size: 0.85rem;
       letter-spacing: 0.2em;
+      color: var(--gold);
       margin-bottom: 1.5rem;
     }
 
@@ -163,6 +124,7 @@
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 900;
       line-height: 1.6;
+      color: var(--navy);
       margin-bottom: 1.5rem;
       letter-spacing: 0.12em;
     }
@@ -170,6 +132,7 @@
     .hero-sub {
       font-size: 1rem;
       line-height: 1.8;
+      color: #3a3a3a;
       margin-bottom: 2.5rem;
     }
 
@@ -620,20 +583,28 @@
   </ul>
 </nav>
 
-<!-- スタイル切替バー（確認用） -->
-<div class="style-switcher">
-  <span>🎨 背景パターンを選ぶ：</span>
-  <button class="style-btn" onclick="setStyle('washi', this)">① 和紙</button>
-  <button class="style-btn active" onclick="setStyle('shishi', this)">② ししおどし（昼）</button>
-  <button class="style-btn" onclick="setStyle('garden', this)">③ 日本庭園（夜）</button>
-</div>
-
 <!-- ヒーロー -->
-<section class="hero style-shishi" id="hero-section">
-  <p class="hero-en">SAPPORO SHODO CLASS</p>
-  <h1>筆と向き合う、<br>静かな時間を。</h1>
-  <p class="hero-sub">初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。<br>お気軽にご体験ください。</p>
-  <a href="#contact" class="btn-primary">無料体験を申し込む</a>
+<section class="hero" id="hero-section">
+  <!-- スライドショー -->
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('Ph/和服女性の筆.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('Ph/男性習字.webp');"></div>
+    <div class="hero-slide" style="background-image:url('Ph/すずりと筆.jpg');"></div>
+    <div class="hero-slide">
+      <video autoplay muted playsinline loop>
+        <source src="Ph/すずり.mov" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <!-- オーバーレイ -->
+  <div class="hero-overlay"></div>
+  <!-- テキスト -->
+  <div class="hero-content">
+    <p class="hero-en">SAPPORO SHODO CLASS</p>
+    <h1>筆と向き合う、<br>静かな時間を。</h1>
+    <p class="hero-sub">初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。<br>お気軽にご体験ください。</p>
+    <a href="#contact" class="btn-primary">無料体験を申し込む</a>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -655,7 +626,7 @@
         筆を持つことが初めての方も、<br>丁寧にご指導いたします。</p>
       </div>
     </div>
-    <div class="about-img" style="background-image:url('https://images.unsplash.com/photo-1547058881-aa0e591d3082?auto=format&fit=crop&w=800&q=80');"></div>
+    <div class="about-img" style="background-image:url('Ph/和服女性の筆.jpg');"></div>
   </div>
 
   <!-- 行②：写真左・テキスト右 -->
@@ -669,7 +640,7 @@
         お仕事や用事で欠席しても、<br>振替受講ができるので安心です。</p>
       </div>
     </div>
-    <div class="about-img" style="background-image:url('https://images.unsplash.com/photo-1585952678521-0f5a5ba17c6e?auto=format&fit=crop&w=800&q=80');"></div>
+    <div class="about-img" style="background-image:url('Ph/すずりと筆.jpg');"></div>
   </div>
 </section>
 
@@ -870,12 +841,17 @@
     document.getElementById('contact-popup').style.display = 'flex';
   }, 5000);
 
-  function setStyle(style, btn) {
-    var hero = document.getElementById('hero-section');
-    hero.className = 'hero style-' + style;
-    document.querySelectorAll('.style-btn').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-  }
+  // スライドショー
+  var slides = document.querySelectorAll('.hero-slide');
+  var current = 0;
+  setInterval(function() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+    // 動画スライドの場合は再生
+    var video = slides[current].querySelector('video');
+    if (video) video.play();
+  }, 5000);
 
   function closePopup() {
     document.getElementById('contact-popup').style.display = 'none';
