@@ -63,21 +63,20 @@
 
     /* ヒーロー */
     .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 560px;
-      overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      min-height: 100vh;
     }
 
-    /* スライドショー */
+    /* 左：スライドショー */
+    .hero-left {
+      flex: 0 0 42%;
+      position: relative;
+      overflow: hidden;
+    }
+
     .hero-slides {
       position: absolute;
       inset: 0;
-      z-index: 0;
     }
 
     .hero-slide {
@@ -91,25 +90,38 @@
 
     .hero-slide.active { opacity: 1; }
 
-    .hero-slide video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* 右：テキスト */
+    .hero-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: #f5f2ed;
     }
 
-    /* 白グレーオーバーレイ */
-    .hero-overlay {
+    /* 右側の透かし背景 */
+    .hero-right::before {
+      content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.42);
-      z-index: 1;
+      background-image: url('Ph/washi.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
     }
 
     /* テキストエリア */
     .hero-content {
       position: relative;
-      z-index: 2;
-      padding: 2rem;
+      z-index: 1;
+    }
+
+    @media (max-width: 700px) {
+      .hero { flex-direction: column; }
+      .hero-left { flex: 0 0 50vw; height: 50vw; width: 100%; }
+      .hero-right { padding: 3rem 1.5rem; }
     }
 
     .hero-en {
@@ -585,21 +597,23 @@
 
 <!-- ヒーロー -->
 <section class="hero" id="hero-section">
-  <!-- スライドショー -->
-  <div class="hero-slides">
-    <div class="hero-slide active" style="background-image:url('Ph/kimono-woman.jpg');"></div>
-    <div class="hero-slide" style="background-image:url('Ph/man-shodo.webp');"></div>
-    <div class="hero-slide" style="background-image:url('Ph/suzuri-fude.jpg');"></div>
-    <div class="hero-slide" style="background-image:url('Ph/shishiodoshi.jpg');"></div>
+  <!-- 左：スライドショー -->
+  <div class="hero-left">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('Ph/kimono-woman.jpg');"></div>
+      <div class="hero-slide" style="background-image:url('Ph/man-shodo.webp');"></div>
+      <div class="hero-slide" style="background-image:url('Ph/suzuri-fude.jpg');"></div>
+      <div class="hero-slide" style="background-image:url('Ph/shishiodoshi.jpg');"></div>
+    </div>
   </div>
-  <!-- オーバーレイ -->
-  <div class="hero-overlay"></div>
-  <!-- テキスト -->
-  <div class="hero-content">
-    <p class="hero-en">SAPPORO SHODO CLASS</p>
-    <h1>筆と向き合う、<br>静かな時間を。</h1>
-    <p class="hero-sub">初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。<br>お気軽にご体験ください。</p>
-    <a href="#contact" class="btn-primary">無料体験を申し込む</a>
+  <!-- 右：テキスト -->
+  <div class="hero-right">
+    <div class="hero-content">
+      <p class="hero-en">SAPPORO SHODO CLASS</p>
+      <h1>筆と向き合う、<br>静かな時間を。</h1>
+      <p class="hero-sub">初心者から上級者まで、<br>札幌で丁寧に書道を学べる教室です。<br>お気軽にご体験ください。</p>
+      <a href="#contact" class="btn-primary">無料体験を申し込む</a>
+    </div>
   </div>
 </section>
 
