@@ -98,9 +98,15 @@
       line-height: 1.8;
     }
 
-    /* 左：スライドショー */
+    /* 左スペース（ロゴが重なるエリア） */
+    .hero-spacer {
+      flex: 0 0 14%;
+      min-width: 0;
+    }
+
+    /* 左：スライドショー帯 */
     .hero-left {
-      flex: 0 0 38%;
+      flex: 0 0 27%;
       position: relative;
       overflow: hidden;
     }
@@ -629,9 +635,11 @@
 
 <!-- ヒーロー -->
 <section class="hero" id="hero-section">
-  <!-- ロゴ：写真の上に重ねて表示 -->
+  <!-- ロゴ：左上に重ねて表示 -->
   <div class="hero-logo">【教室名】</div>
-  <!-- 左：スライドショー -->
+  <!-- 左スペース -->
+  <div class="hero-spacer"></div>
+  <!-- 中：スライドショー帯 -->
   <div class="hero-left">
     <div class="hero-slides">
       <div class="hero-slide active" style="background-image:url('Ph/kimono-woman.jpg');"></div>
